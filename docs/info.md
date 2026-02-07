@@ -16,6 +16,10 @@ D Flipflops are used to slow down the clock. The DIP switches are used to select
 
 Explain how to use your project
 
+Look at the segment display and see if it counts up correctly in the selected base.
+
 ## External hardware
 
 List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+
+None
