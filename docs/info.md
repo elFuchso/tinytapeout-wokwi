@@ -10,6 +10,7 @@ You can also include images in this folder and reference them in the markdown. E
 ## How it works
 
 Explain how your project works
+D Flipflops are used to slow down the clock. The DIP switches are used to select the base of the counter that counts up in the 7 segment display
 
 ## How to test
 
