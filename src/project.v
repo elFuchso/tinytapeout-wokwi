@@ -23,10 +23,6 @@ module tt_um_hexcnt_elfuchso (
     // Internal signals
     reg [23:0] clk_divider;  // To slow down the ~10MHz clock
     reg [3:0]  counter;      // The 4-bit value to display
-    
-    // Bidirectional pins not used, set to input/high-impedance
-    assign uio_oe = 8'b00000000;
-    assign uio_out = 8'b00000000;
 
     // Clock divider to generate a "tick" roughly every 1.6 million cycles
     // At 10MHz, this is about 6 counts per second.
