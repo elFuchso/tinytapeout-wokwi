@@ -17,15 +17,15 @@ async def test_project(dut):
     # Reset
     dut._log.info("Reset")
     dut.ena.value = 1
-    dut.ui.value = 0
-    dut.uio.value = 0
+    dut.ui_in.value = 0
+    dut.uio_in.value = 0
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 5)
     dut.rst_n.value = 1
     await ClockCycles(dut.clk, 5)
 
     dut._log.info("Test Counter: Decimal Mode Up")
-    dut.ui.value = 0b00000001 # ui[0]=1 (Up), ui[1]=0 (Dec)
+    dut.ui_in.value = 0b00000001 # ui[0]=1 (Up), ui[1]=0 (Dec)
     
     # Wait for a few cycles and check segments
     # 0 should be 0x3F (63)
@@ -39,7 +39,7 @@ async def test_project(dut):
         await ClockCycles(dut.clk, 1)
 
     dut._log.info("Test Counter: Hex Mode")
-    dut.ui.value = 0b00000011 # ui[0]=1 (Up), ui[1]=1 (Hex)
+    dut.ui_in.value = 0b00000011 # ui[0]=1 (Up), ui[1]=1 (Hex)
     await ClockCycles(dut.clk, 10) # Advance to 'A'
     
     # 0xA in segments is 0x77 (binary 1110111) + uo[7] is 1 for Hex mode = 0xF7 (247)
