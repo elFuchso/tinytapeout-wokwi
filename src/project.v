@@ -6,18 +6,19 @@
 `default_nettype none
 
 module tt_um_hexcnt_elfuchso (
-    input  wire [7:0] ui,    // Dedicated inputs
-    output wire [7:0] uo,    // Dedicated outputs
-    input  wire [7:0] uio,   // IOs: Bidirectional
-    output wire [7:0] uio_oe,// IOs: Enable
-    input  wire       ena,   // always 1 when the design is powered
-    input  wire       clk,   // clock
-    input  wire       rst_n  // reset_n - low to reset
+    input  wire [7:0] ui_in,    // Dedicated inputs
+    output wire [7:0] uo_out,   // Dedicated outputs
+    input  wire [7:0] uio_in,   // IOs: Input path
+    output wire [7:0] uio_out,  // IOs: Output path
+    output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
+    input  wire       ena,      // always 1 when the design is powered, so you can ignore it
+    input  wire       clk,      // clock
+    input  wire       rst_n     // reset_n - low to reset
 );
 
     // Pin assignment for clarity
-    wire up_down = ui[0];    // 1 for Up, 0 for Down
-    wire mode_hex = ui[1];   // 1 for Hex (0-F), 0 for Decimal (0-9)
+    wire up_down = ui_in[0];    // 1 for Up, 0 for Down
+    wire mode_hex = ui_in[1];   // 1 for Hex (0-F), 0 for Decimal (0-9)
     
     // Internal signals
     reg [23:0] clk_divider;  // To slow down the ~10MHz clock
@@ -25,7 +26,8 @@ module tt_um_hexcnt_elfuchso (
     
     // Bidirectional pins not used, set to input/high-impedance
     assign uio_oe = 8'b00000000;
-    assign uio    = 8'b00000000;
+    assign uio_in    = 8'b00000000;
+    assign uio_out = 8'b00000000;
 
     // Clock divider to generate a "tick" roughly every 1.6 million cycles
     // At 10MHz, this is about 6 counts per second.
@@ -85,7 +87,7 @@ module tt_um_hexcnt_elfuchso (
     end
 
     // Assign segments to outputs. uo[7] is the decimal point (mode indicator)
-    assign uo[6:0] = segments;
-    assign uo[7] = mode_hex; // DP lights up if we are in Hex mode
+    assign uo_out[6:0] = segments;
+    assign uo_out[7] = mode_hex; // DP lights up if we are in Hex mode
 
 endmodule
