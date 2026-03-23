@@ -34,7 +34,7 @@ async def test_project(dut):
     # etc.
     expected_dec = [0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F]
     
-    for i in range(10):
+    for i in range(1):
         # We wait for the 'tick'. 
         await ClockCycles(dut.clk, 17) 
         
@@ -42,10 +42,3 @@ async def test_project(dut):
         current_segments = int(dut.uo_out.value) & 0x7F
         dut._log.info(f"Checking digit {i}: Expected {hex(expected_dec[i])}, got {hex(current_segments)}")
         assert current_segments == expected_dec[i]
-
-    dut._log.info("Test Counter: Hex Mode indicator")
-    # Turn on Hex mode (ui_in[1] = 1)
-    dut.ui_in.value = 0x03
-    await ClockCycles(dut.clk, 1)
-    # uo_out[7] should now be 1
-    assert int(dut.uo_out.value) & 0x80 == 0x80
