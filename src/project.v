@@ -26,7 +26,6 @@ module tt_um_hexcnt_elfuchso (
     
     // Bidirectional pins not used, set to input/high-impedance
     assign uio_oe = 8'b00000000;
-    assign uio_in    = 8'b00000000;
     assign uio_out = 8'b00000000;
 
     // Clock divider to generate a "tick" roughly every 1.6 million cycles
