@@ -21,7 +21,6 @@ module tt_um_hexcnt_elfuchso (
     wire mode_hex = ui_in[1];   // 1 for Hex (0-F), 0 for Decimal (0-9)
 
     // assign unused pins
-    assign ui_
     assign uio_out = 0;
     assign uio_oe  = 0;
     
