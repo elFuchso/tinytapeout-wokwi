@@ -89,6 +89,6 @@ module tt_um_hexcnt_elfuchso (
     assign uo_out[6:0] = segments;
     assign uo_out[7] = mode_hex; // DP lights up if we are in Hex mode
 
-    wire _unused = &{uo_in[7:2], ena, rst_n, 1'b0};
+    wire _unused = &{ui_in[7:2], ena, rst_n, 1'b0};
 
 endmodule
